@@ -1,0 +1,8 @@
+<!-- Asctec autopilot nodelet publisher -->
+<library path="lib/libautopilot_nodelet">
+  <class name="asctec_autopilot/AutoPilotNodelet" type="AutoPilotNodelet" base_class_type="nodelet::Nodelet">
+    <description>
+      Asctec Autopilot nodelet publisher.
+    </description>
+  </class>
+</library>

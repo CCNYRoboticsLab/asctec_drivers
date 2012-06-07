@@ -1,0 +1,51 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+AutoPilot	autopilot.cpp	/^  AutoPilot::AutoPilot ()$/;"	f	class:asctec::AutoPilot
+SerialInterface	serial_interface.cpp	/^  SerialInterface::SerialInterface (std::string port, uint32_t speed):serialport_name_ (port), serialport_speed_ (speed)$/;"	f	class:asctec::SerialInterface
+Telemetry	telemetry.cpp	/^  Telemetry::Telemetry ()$/;"	f	class:asctec::Telemetry
+asctec	autopilot.cpp	/^namespace asctec$/;"	n	file:
+asctec	crc16.cpp	/^namespace asctec$/;"	n	file:
+asctec	serial_interface.cpp	/^namespace asctec$/;"	n	file:
+asctec	telemetry.cpp	/^namespace asctec$/;"	n	file:
+bitrate	serial_interface.cpp	/^  speed_t SerialInterface::bitrate (int Bitrate)$/;"	f	class:asctec::SerialInterface
+buildRequest	telemetry.cpp	/^  void Telemetry::buildRequest ()$/;"	f	class:asctec::Telemetry
+cmd	serial_interface.cpp	/^    unsigned char cmd[] = ">*>di";$/;"	m	namespace:asctec	file:
+copyCONTROLLER_OUTPUT	telemetry.cpp	/^  void Telemetry::copyCONTROLLER_OUTPUT() {$/;"	f	class:asctec::Telemetry
+copyGPS_DATA	telemetry.cpp	/^  void Telemetry::copyGPS_DATA() {$/;"	f	class:asctec::Telemetry
+copyGPS_DATA_ADVANCED	telemetry.cpp	/^  void Telemetry::copyGPS_DATA_ADVANCED() {$/;"	f	class:asctec::Telemetry
+copyIMU_CALCDATA	telemetry.cpp	/^  void Telemetry::copyIMU_CALCDATA() {$/;"	f	class:asctec::Telemetry
+copyIMU_RAWDATA	telemetry.cpp	/^  void Telemetry::copyIMU_RAWDATA(){$/;"	f	class:asctec::Telemetry
+copyLL_STATUS	telemetry.cpp	/^  void Telemetry::copyLL_STATUS() {$/;"	f	class:asctec::Telemetry
+copyRC_DATA	telemetry.cpp	/^  void Telemetry::copyRC_DATA() {$/;"	f	class:asctec::Telemetry
+crc16	crc16.cpp	/^  unsigned short crc16 (void *data, unsigned short cnt)$/;"	f	namespace:asctec
+crc_update	crc16.cpp	/^  unsigned short crc_update (unsigned short crc, unsigned char data)$/;"	f	namespace:asctec
+crc_valid	crc16.cpp	/^  bool crc_valid (unsigned short packet_crc, void *data, unsigned short cnt)$/;"	f	namespace:asctec
+drain	serial_interface.cpp	/^  void SerialInterface::drain ()$/;"	f	class:asctec::SerialInterface
+dumpCONTROLLER_OUTPUT	telemetry.cpp	/^  void Telemetry::dumpCONTROLLER_OUTPUT() {$/;"	f	class:asctec::Telemetry
+dumpCTRL_INPUT	telemetry.cpp	/^  void Telemetry::dumpCTRL_INPUT() {$/;"	f	class:asctec::Telemetry
+dumpGPS_DATA	telemetry.cpp	/^  void Telemetry::dumpGPS_DATA() {$/;"	f	class:asctec::Telemetry
+dumpGPS_DATA_ADVANCED	telemetry.cpp	/^  void Telemetry::dumpGPS_DATA_ADVANCED() {$/;"	f	class:asctec::Telemetry
+dumpIMU_CALCDATA	telemetry.cpp	/^  void Telemetry::dumpIMU_CALCDATA() {$/;"	f	class:asctec::Telemetry
+dumpIMU_RAWDATA	telemetry.cpp	/^  void Telemetry::dumpIMU_RAWDATA() {$/;"	f	class:asctec::Telemetry
+dumpLL_STATUS	telemetry.cpp	/^  void Telemetry::dumpLL_STATUS() {$/;"	f	class:asctec::Telemetry
+dumpRC_DATA	telemetry.cpp	/^  void Telemetry::dumpRC_DATA() {$/;"	f	class:asctec::Telemetry
+enableCommanding	telemetry.cpp	/^void Telemetry::enableCommanding (uint8_t interval, uint8_t offset)$/;"	f	class:asctec::Telemetry
+enablePolling	telemetry.cpp	/^  void Telemetry::enablePolling (RequestType msg, uint8_t interval, uint8_t offset)$/;"	f	class:asctec::Telemetry
+flush	serial_interface.cpp	/^  void SerialInterface::flush ()$/;"	f	class:asctec::SerialInterface
+getPacket	serial_interface.cpp	/^  bool SerialInterface::getPacket (char *spacket, unsigned char &packet_type, unsigned short &packet_crc,$/;"	f	class:asctec::SerialInterface
+main	autopilot.cpp	/^int main (int argc, char **argv)$/;"	f
+main	teletest.cpp	/^int main (int argc, char **argv)$/;"	f
+publishPackets	telemetry.cpp	/^  void Telemetry::publishPackets()$/;"	f	class:asctec::Telemetry
+requestToString	telemetry.cpp	/^std::string Telemetry::requestToString(RequestTypes::RequestType t)$/;"	f	class:asctec::Telemetry
+result	serial_interface.cpp	/^      bool result = false;$/;"	m	namespace:asctec	file:
+spin	autopilot.cpp	/^  void AutoPilot::spin (const ros::TimerEvent& e)$/;"	f	class:asctec::AutoPilot
+stall	serial_interface.cpp	/^  void SerialInterface::stall (bool wait)$/;"	f	class:asctec::SerialInterface
+write	serial_interface.cpp	/^  void SerialInterface::write (char *output, int len)$/;"	f	class:asctec::SerialInterface
+write	serial_interface.cpp	/^  void SerialInterface::write (unsigned char *output, int len)$/;"	f	class:asctec::SerialInterface
+~AutoPilot	autopilot.cpp	/^  AutoPilot::~AutoPilot ()$/;"	f	class:asctec::AutoPilot
+~SerialInterface	serial_interface.cpp	/^  SerialInterface::~SerialInterface ()$/;"	f	class:asctec::SerialInterface
+~Telemetry	telemetry.cpp	/^  Telemetry::~Telemetry ()$/;"	f	class:asctec::Telemetry

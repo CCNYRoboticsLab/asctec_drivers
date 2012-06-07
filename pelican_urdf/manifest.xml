@@ -1,0 +1,14 @@
+<package>
+  <description brief="pelican_urdf">
+
+     STL and URDF files for the AscTec Pelican quadrotor.
+
+  </description>
+  <author>William Morris, Ivan Dryanovski</author>
+  <license>GPL</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pelican_urdf</url>
+
+</package>
+
+
