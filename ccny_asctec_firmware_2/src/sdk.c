@@ -178,7 +178,7 @@ void sdkInit(void)
 void SDK_mainloop(void)
 {
   unsigned int sdk_cycle_start_time = T1TC;
-  WO_SDK.ctrl_mode = 0x00; //0x00: absolute angle and throttle control
+  WO_SDK.ctrl_mode = 0x02; //0x02: absolute angle and throttle control
 
   ++g_sdk_loops;
 

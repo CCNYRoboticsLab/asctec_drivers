@@ -10,7 +10,7 @@ extern void timer1ISR(void);
 volatile unsigned int GPS_timeout;
 extern unsigned int GPS_cnt_trigger[4];
 unsigned char GPS_init_status;
-
+volatile char SYSTEM_initialized; //new
 void calibrate(void);
 
 //#define BATTERY_WARNING_VOLTAGE 10700   //10500 mV, for newer batteries with flatter discharging characteristic, such as TP 5000

@@ -29,7 +29,8 @@ src/LL_HL_comm.o: src/LL_HL_comm.c include/ccny_asctec_firmware/main.h \
   C:\WinARM\arm-elf\include/stdlib.h \
   C:\WinARM\arm-elf\include/machine/stdlib.h \
   C:\WinARM\arm-elf\include/alloca.h include/ccny_asctec_firmware/ssp.h \
-  include/ccny_asctec_firmware/comm_util_LL.h
+  include/ccny_asctec_firmware/comm_util_LL.h \
+  include/ccny_asctec_firmware/declination.h
 
 include/ccny_asctec_firmware/main.h:
 
@@ -108,3 +109,5 @@ C:\WinARM\arm-elf\include/alloca.h:
 include/ccny_asctec_firmware/ssp.h:
 
 include/ccny_asctec_firmware/comm_util_LL.h:
+
+include/ccny_asctec_firmware/declination.h:

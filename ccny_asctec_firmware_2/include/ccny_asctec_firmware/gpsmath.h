@@ -44,5 +44,6 @@ extern struct GPS_TIME GPS_Time;
 
 //trigger's new gps data transmission
 extern unsigned int gpsDataOkTrigger;
+void xy2latlon(double lat0, double lon0, double X, double Y, double *lat, double *lon);	//X: East, Y: North in m; lat0,lon0: Reference coordinates; lat,lon: current GPS measurement
 
 #endif // GPS_MATH_H

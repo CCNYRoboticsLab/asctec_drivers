@@ -34,6 +34,7 @@ struct IMU_RAWDATA IMU_RawData;
 volatile unsigned int int_cnt = 0, cnt = 0, mainloop_cnt = 0;
 volatile unsigned char mainloop_trigger = 0;
 volatile unsigned int GPS_timeout = 0;
+volatile char SYSTEM_initialized=0; //new
 
 //extern unsigned char data_requested;
 //extern int ZeroDepth;

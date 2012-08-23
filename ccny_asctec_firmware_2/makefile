@@ -68,6 +68,7 @@ TARGET = main
 #SRCARM = $(TARGET).c
 SRCARM = src/LL_HL_comm.c
 SRCARM += src/gpsmath.c
+SRCARM += src/buzzer.c
 SRCARM += src/sdk.c
 SRCARM += src/comm_util_LL.c
 SRCARM += src/util.c
@@ -250,6 +251,7 @@ MATH_LIB = -lm
 #    --cref:    add cross reference to  map file
 LDFLAGS = -nostartfiles -Wl,-Map=$(TARGET).map,--cref
 LDFLAGS += -lc
+#LDFLAGS += -lc -lgcc -ldeclination -lublox 
 LDFLAGS += $(NEWLIBLPC) $(MATH_LIB)
 LDFLAGS += -lc -lgcc 
 LDFLAGS += $(CPLUSPLUS_LIB)
