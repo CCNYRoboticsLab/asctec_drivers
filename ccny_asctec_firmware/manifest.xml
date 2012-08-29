@@ -1,13 +1,13 @@
 <package>
-  <description brief="asctec_hl_firmware">
+  <description brief="ccny_asctec_firmware">
 
-     Firmware code for the Asctec Autopilot HighLevel Processor 
+     Firmware for the Asctec Autopilot HighLevel Processor, in part based on asctec_hl_firmware by Achtelik et al. For the older (pre-2012) version of the asctec HL/LL SDK.
 
   </description>
-  <author>Markus Achtelik, Michael Achtelik, Stephan Weiss, Laurent Kneip</author>
+  <author>Ivan Dryanovski, Roberto G. Valenti</author>
   <license>sdk.c/sdk.h: BSD; HL SDK, SSDK lib by AscTec</license>
-  <review status="unreviewed"  notes="This is unstable and under active development"/>
-  <url>http://ros.org/wiki/asctec_hl_firmware</url>
+  <review status="unreviewed" notes="Under active development"/>
+  <url>http://ros.org/wiki/ccny_asctec_firmware</url>
 </package>
 
 
