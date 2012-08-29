@@ -361,39 +361,39 @@ END GROUP
                 0x00001694                feedbackBeep
                 0x00001f48                sendStatusData
                 0x000012a4                processLandingThrust
- .text          0x00003d08      0x468 src/comm_util_LL.o
-                0x0000411c                LLToSIAnglePitch
-                0x00003f8c                LLToSIAngleRatePitch
+ .text          0x00003d08      0x480 src/comm_util_LL.o
+                0x00004134                LLToSIAnglePitch
+                0x0000400c                LLToSIAngleRatePitch
                 0x00003da4                LLToSIAccX
                 0x00003d80                LLToSIClimb
-                0x00003ea4                SIToLLCmdPitch
-                0x00003ff0                LLToSIAngleRateRoll
-                0x00003f34                LLToSIAngleRoll
-                0x00003e2c                LLToSIAccZ
-                0x00003e70                SIToLLCmdRoll
-                0x000040c0                LLToSIAngleYaw
-                0x00004058                LLToSIAngleRateYaw
-                0x00003ed4                SIToLLCmdYawRate
-                0x00003f04                SIToLLCmdThrust
-                0x00003de8                LLToSIAccY
+                0x00003eb8                SIToLLCmdPitch
+                0x00004070                LLToSIAngleRateRoll
+                0x00003f4c                LLToSIAngleRoll
+                0x00003e38                LLToSIAccZ
+                0x00003e84                SIToLLCmdRoll
+                0x000040d8                LLToSIAngleYaw
+                0x00003fa4                LLToSIAngleRateYaw
+                0x00003ee8                SIToLLCmdYawRate
+                0x00003f1c                SIToLLCmdThrust
+                0x00003dec                LLToSIAccY
                 0x00003d08                degreesToRadians
                 0x00003d44                radiansToDegrees
- .text          0x00004170       0x54 src/util.o
-                0x00004170                wait
- .text          0x000041c4     0x1864 src/pid.o
-                0x000042c8                pidParamUpdate
-                0x00004c60                pidCalc
-                0x00004db4                processCtrl
-                0x000041c4                pidReset
- .text          0x00005a28      0xce0 src/kalman.o
-                0x00005b6c                resetKalmanFilter
-                0x00005c78                CorrectPos
-                0x00005de0                KFilter
-                0x00005ba4                CorrectYaw
-                0x00005b3c                InitKalYaw
-                0x00005a28                InitKalPos
-                0x00005d30                PredictPos
-                0x00005c34                PredictYaw
+ .text          0x00004188       0x54 src/util.o
+                0x00004188                wait
+ .text          0x000041dc     0x1864 src/pid.o
+                0x000042e0                pidParamUpdate
+                0x00004c78                pidCalc
+                0x00004dcc                processCtrl
+                0x000041dc                pidReset
+ .text          0x00005a40      0xcc8 src/kalman.o
+                0x00005b84                resetKalmanFilter
+                0x00005c90                CorrectPos
+                0x00005df8                KFilter
+                0x00005bbc                CorrectYaw
+                0x00005b54                InitKalYaw
+                0x00005a40                InitKalPos
+                0x00005d48                PredictPos
+                0x00005c4c                PredictYaw
  .text          0x00006708      0xd0c src/matrices.o
                 0x000069c0                negMatrix
                 0x00007068                determinant
@@ -2553,7 +2553,6 @@ g_flight_action_pkt_info                          src/sdk.o
 g_flight_state_pkt                                src/pid.o
                                                   src/sdk.o
 g_imu_gravity                                     src/main.o
-                                                  src/kalman.o
 g_imu_pkt                                         src/kalman.o
                                                   src/sdk.o
 g_kf_x_enabled                                    src/kalman.o

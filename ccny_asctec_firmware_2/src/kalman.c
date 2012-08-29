@@ -185,9 +185,9 @@ void KFilter (void)
   g_cos_psi = cos(yaw);
   g_sin_psi = sin(yaw);
 
-  g_accel_x = LLToSIAccX(LL_1khz_attitude_data.acc_x, g_imu_gravity);
-  g_accel_y = LLToSIAccY(LL_1khz_attitude_data.acc_y, g_imu_gravity);
-  g_accel_z = LLToSIAccZ(LL_1khz_attitude_data.acc_z, g_imu_gravity);
+  g_accel_x = LLToSIAccX(LL_1khz_attitude_data.acc_x);//, g_imu_gravity);
+  g_accel_y = LLToSIAccY(LL_1khz_attitude_data.acc_y);//, g_imu_gravity);
+  g_accel_z = LLToSIAccZ(LL_1khz_attitude_data.acc_z);//, g_imu_gravity);
 
   // body frame to world frame transform
 

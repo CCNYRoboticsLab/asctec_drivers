@@ -14,9 +14,9 @@ inline float LLToSIClimb(int16_t climb);
 
 // ****************** accel ***********************
 
-inline float LLToSIAccX(int16_t acc, float g);
-inline float LLToSIAccY(int16_t acc, float g);
-inline float LLToSIAccZ(int16_t acc, float g);
+inline float LLToSIAccX(int16_t acc);
+inline float LLToSIAccY(int16_t acc);
+inline float LLToSIAccZ(int16_t acc);
 
 /*
 inline int32_t LLtoCommAccX(int16_t acc, float g);
