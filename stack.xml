@@ -4,7 +4,7 @@
   <license>GPL</license>  
   <review status="experimental" notes="Under active development"/>
   <url>http://ros.org/wiki/asctec_drivers</url>
-  <version>1.1.0</version>
+  <version>0.1.0</version>
   <depend stack="common_msgs" /> <!-- nav_msgs, geometry_msgs, sensor_msgs -->
   <depend stack="diagnostics" /> <!-- diagnostic_updater -->
   <depend stack="geometry" /> <!-- tf -->
