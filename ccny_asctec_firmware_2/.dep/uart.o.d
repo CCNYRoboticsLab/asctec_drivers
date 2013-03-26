@@ -5,9 +5,8 @@ src/uart.o: src/uart.c C:\WinARM\arm-elf\include/string.h \
   C:\WinARM\arm-elf\include/sys/reent.h C:\WinARM\arm-elf\include/_ansi.h \
   C:\WinARM\arm-elf\include/sys/_types.h \
   C:\WinARM\arm-elf\include/sys/lock.h \
-  c:\winarm\bin\../lib/gcc/arm-elf/4.1.1/include/stddef.h \
-  C:\WinARM\arm-elf\include/sys/string.h \
-  ../mav_common/include/mav_common/comm.h \
+  c:\asctec_arm_sdk\winarm\bin\../lib/gcc/arm-elf/4.1.1/include/stddef.h \
+  C:\WinARM\arm-elf\include/sys/string.h mav_common/comm.h \
   external/Common_WinARM/inc/LPC214x.h \
   external/Common_WinARM/inc/interrupt_utils.h \
   include/ccny_asctec_firmware/system.h \
@@ -15,10 +14,8 @@ src/uart.o: src/uart.c C:\WinARM\arm-elf\include/string.h \
   C:\WinARM\arm-elf\include/stdint.h \
   include/ccny_asctec_firmware/LPC214x.h \
   include/ccny_asctec_firmware/uart.h \
-  C:\WinARM\arm-elf\include/inttypes.h \
-  ../mav_common/include/mav_common/comm_packets.h \
-  ../mav_common/include/mav_common/comm_types.h \
-  external/Common_WinARM/inc/irq.h \
+  C:\WinARM\arm-elf\include/inttypes.h mav_common/comm_packets.h \
+  mav_common/comm_types.h external/Common_WinARM/inc/irq.h \
   include/ccny_asctec_firmware/hardware.h \
   include/ccny_asctec_firmware/main.h \
   include/ccny_asctec_firmware/system.h \
@@ -45,11 +42,11 @@ C:\WinARM\arm-elf\include/sys/_types.h:
 
 C:\WinARM\arm-elf\include/sys/lock.h:
 
-c:\winarm\bin\../lib/gcc/arm-elf/4.1.1/include/stddef.h:
+c:\asctec_arm_sdk\winarm\bin\../lib/gcc/arm-elf/4.1.1/include/stddef.h:
 
 C:\WinARM\arm-elf\include/sys/string.h:
 
-../mav_common/include/mav_common/comm.h:
+mav_common/comm.h:
 
 external/Common_WinARM/inc/LPC214x.h:
 
@@ -69,9 +66,9 @@ include/ccny_asctec_firmware/uart.h:
 
 C:\WinARM\arm-elf\include/inttypes.h:
 
-../mav_common/include/mav_common/comm_packets.h:
+mav_common/comm_packets.h:
 
-../mav_common/include/mav_common/comm_types.h:
+mav_common/comm_types.h:
 
 external/Common_WinARM/inc/irq.h:
 

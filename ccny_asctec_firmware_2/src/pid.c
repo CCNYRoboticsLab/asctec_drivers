@@ -149,8 +149,8 @@ void processCtrl(void)
 
   if (g_flight_state_pkt.state == MAV_STATE_FLYING)
   {
-    float roll     = LLToSIAngleRoll (LL_1khz_attitude_data.angle_roll);
-    float pitch    = LLToSIAnglePitch(LL_1khz_attitude_data.angle_pitch);
+    float roll     = LLToSIAngleRoll (RO_ALL_Data.angle_roll);//LL_1khz_attitude_data.angle_roll);
+    float pitch    = LLToSIAnglePitch(RO_ALL_Data.angle_pitch);//LL_1khz_attitude_data.angle_pitch);
 
     float a_x = g_accel_x * cos(pitch) + g_accel_y * sin(pitch)*sin(roll) + g_accel_z * sin(pitch)*cos(roll);
     float a_y = g_accel_y * cos(roll)  - g_accel_z * sin(roll);
@@ -213,7 +213,7 @@ void processCtrl(void)
       //float vel_y_bf  = g_pose_pkt.vy * g_cos_psi - g_pose_pkt.vx * g_sin_psi;
       //float roll_rate = LLToSIAngleRateRoll (LL_1khz_attitude_data.angvel_roll);
 
-      g_ctrl_cmd.cmd_roll = - pidCalc(&pid_y, des_y_bf, -vel_y_bf, pid_y.d_base, dt); // positive roll gives you negative y
+      g_ctrl_cmd.cmd_roll = -pidCalc(&pid_y, des_y_bf, -vel_y_bf, pid_y.d_base, dt); // positive roll gives you negative y
       g_ctrl_debug_pkt.pid_error_y_bf = des_y_bf;
     }
     else if (g_ctrl_cfg_pkt.ctrl_mode_roll == MAV_CTRL_MODE_VELOCITY)
@@ -285,7 +285,7 @@ void processCtrl(void)
     {
       float des_yaw     = g_des_pose_pkt.yaw;
       float current_yaw = g_pose_pkt.yaw;
-      float yaw_rate    = LLToSIAngleRateYaw(LL_1khz_attitude_data.angvel_yaw);
+      float yaw_rate    = LLToSIAngleRateYaw(RO_ALL_Data.angvel_yaw);//LL_1khz_attitude_data.angvel_yaw);
 
       float error =  des_yaw - current_yaw;
       normalizeSIAnglePi(&error);

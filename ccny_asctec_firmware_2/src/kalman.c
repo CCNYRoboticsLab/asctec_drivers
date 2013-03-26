@@ -34,9 +34,11 @@ void InitKalPos(KalPos *k)
 {
   k->Input = 0;
 
-  for (int i=0; i<2; i++)
+  unsigned int i;
+  unsigned int j;
+  for (i=0; i<2; i++)
   {
-    for (int j=0; j<2; j++)
+    for (j=0; j<2; j++)
     {
       if (i==j)
         k->A[i][j] = k->At[i][j] = k->P[i][j] = k->T[i][j] = k->I[i][j] = 1;
@@ -45,15 +47,15 @@ void InitKalPos(KalPos *k)
     }
   }
 
-  for (int i=0; i<2; i++)
+  for (i=0; i<2; i++)
   {
-    for (int j=0; j<2; j++)
+    for (j=0; j<2; j++)
     {
         k->K[i][j] = k->Q[i][j] = k->R[i][j] = 0;
     }
   }
 
-  for (int i=0; i<2; i++)
+  for (i=0; i<2; i++)
   {
     k->Correction[i] = k->Res[i] = 0;//KalPos->Est_out[i] =
   }
@@ -155,14 +157,14 @@ void KFilter (void)
   float dt = 0.001;
   float vz_p;
 
-  vz_p = LLToSIClimb(LL_1khz_attitude_data.dheight);  // z velocity from pressure, SI
+  vz_p = LLToSIClimb(RO_ALL_Data.fusion_dheight); //LL_1khz_attitude_data.dheight);  // z velocity from pressure, SI
 
   g_vz_p_f = 0.995 * g_vz_p_f + 0.005 * vz_p;   // simple smoothing filter
 
-  roll     = LLToSIAngleRoll (LL_1khz_attitude_data.angle_roll);
-  pitch    = LLToSIAnglePitch(LL_1khz_attitude_data.angle_pitch);
+  roll     = LLToSIAngleRoll (RO_ALL_Data.angle_roll);//LL_1khz_attitude_data.angle_roll);
+  pitch    = LLToSIAnglePitch(RO_ALL_Data.angle_pitch);//LL_1khz_attitude_data.angle_pitch);
 
-  yaw_rate = LLToSIAngleRateYaw(LL_1khz_attitude_data.angvel_yaw);
+  yaw_rate = LLToSIAngleRateYaw(RO_ALL_Data.angvel_yaw);//LL_1khz_attitude_data.angvel_yaw);
 
   if (first_time == 1)
   {
@@ -179,15 +181,15 @@ void KFilter (void)
   }
   else
   {
-    yaw = LLToSIAngleYaw (LL_1khz_attitude_data.angle_yaw);
+    yaw = LLToSIAngleYaw (RO_ALL_Data.angle_yaw);
   }
 
   g_cos_psi = cos(yaw);
   g_sin_psi = sin(yaw);
 
-  g_accel_x = LLToSIAccX(LL_1khz_attitude_data.acc_x);//, g_imu_gravity);
-  g_accel_y = LLToSIAccY(LL_1khz_attitude_data.acc_y);//, g_imu_gravity);
-  g_accel_z = LLToSIAccZ(LL_1khz_attitude_data.acc_z);//, g_imu_gravity);
+  g_accel_x = LLToSIAccX(RO_ALL_Data.acc_x);
+  g_accel_y = LLToSIAccY(RO_ALL_Data.acc_y);
+  g_accel_z = LLToSIAccZ(RO_ALL_Data.acc_z);
 
   // body frame to world frame transform
 

@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <math.h>
 
-#define GRAVITY_SI      9.810665            // in SI m/s^2
+#define GRAVITY_SI      9.80665            // in SI m/s^2
 //#define GRAVITY_COMM    GRAVITY_SI * 1000.0 // in Comm  mm/s^2
 
 inline float degreesToRadians(float angle);
@@ -25,16 +25,16 @@ inline int32_t LLtoCommAccZ(int16_t acc, float g);
 */
 // ****************** angle rate ***********************
 
-inline float LLToSIAngleRateYaw  (int16_t angle_rate);
-inline float LLToSIAngleRateRoll (int16_t angle_rate);
-inline float LLToSIAngleRatePitch(int16_t angle_rate);
+inline float LLToSIAngleRateYaw  (int angle_rate);
+inline float LLToSIAngleRateRoll (int angle_rate);
+inline float LLToSIAngleRatePitch(int angle_rate);
 //inline int32_t LLtoCommAngleRateYaw(int16_t angle_rate);
 
 // ****************** angle ***********************
 
-inline float LLToSIAngleRoll(int16_t angle);
-inline float LLToSIAnglePitch(int16_t angle);
-inline float LLToSIAngleYaw(uint16_t angle);
+inline float LLToSIAngleRoll(int angle);
+inline float LLToSIAnglePitch(int angle);
+inline float LLToSIAngleYaw(int angle);
 
 /*
 inline uint16_t LLtoCommAngleRoll (int16_t angle);

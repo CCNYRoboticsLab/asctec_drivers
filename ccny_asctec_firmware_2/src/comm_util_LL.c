@@ -19,17 +19,17 @@ inline float LLToSIClimb(int16_t climb)
 
 float LLToSIAccX(int16_t acc)
 {
-  return   (float)(acc) / 1000.0 * GRAVITY_SI ;
+  return   (float)(acc) / 10000.0 * GRAVITY_SI ;
 }
 
 float LLToSIAccY(int16_t acc)
 {
-  return ( -(float)(acc)  ) / 1000.0 * GRAVITY_SI ;
+  return ( -(float)(acc)  ) / 10000.0 * GRAVITY_SI ;
 }
 
 float LLToSIAccZ(int16_t acc)
 {
-  return ( - (float)(acc)  ) / 1000.0 * GRAVITY_SI ;
+  return ( -(float)(acc)  ) / 10000.0 * GRAVITY_SI ;
 }
 
 /*
@@ -50,23 +50,23 @@ int32_t LLtoCommAccZ(int16_t acc, float g)
 */
 // ****************** angle ***********************
 
-float LLToSIAngleRoll(int16_t angle)
+float LLToSIAngleRoll(int angle)
 {
-  float ta =  degreesToRadians(((float)(-angle)) / 100.0);
+  float ta =  degreesToRadians(((float)(angle)) / 1000.0);
   //normalizeSIAngle2Pi(&ta);
   return ta;
 }
 
-float LLToSIAnglePitch(int16_t angle)
+float LLToSIAnglePitch(int angle)
 {
-  float ta = degreesToRadians(((float)(angle)) / 100.0);
+  float ta = degreesToRadians(((float)(-angle)) / 1000.0);
   //normalizeSIAngle2Pi(&ta);
   return ta;
 }
 
-float LLToSIAngleYaw(uint16_t angle)
+float LLToSIAngleYaw(int angle)
 {
-  float ta = degreesToRadians(((float)(36000-angle)) / 100.0);
+  float ta = degreesToRadians(((float)(360000-angle)) / 1000.0);
   //normalizeSIAngle2Pi(&ta);
   return ta;
 }
@@ -88,17 +88,17 @@ uint16_t LLtoCommAngleYaw(uint16_t angle)
 */
 // ****************** angle rate ***********************
 
-float LLToSIAngleRateRoll(int16_t angle_rate)
-{
-  return degreesToRadians( (float)(-angle_rate) * 0.0154 );
-}
-
-float LLToSIAngleRatePitch(int16_t angle_rate)
+float LLToSIAngleRateRoll(int angle_rate)
 {
   return degreesToRadians( (float)(angle_rate) * 0.0154 );
 }
 
-float LLToSIAngleRateYaw(int16_t angle_rate)
+float LLToSIAngleRatePitch(int angle_rate)
+{
+  return degreesToRadians( (float)(-angle_rate) * 0.0154 );
+}
+
+float LLToSIAngleRateYaw(int angle_rate)
 {
   return degreesToRadians( (float)(-angle_rate) * 0.0154 );
 }
@@ -113,12 +113,12 @@ int32_t LLtoCommAngleRateYaw(int16_t angle_rate)
 
 short SIToLLCmdRoll (float angle_cmd)
 {
-  return -((short)(angle_cmd * 2293.578 )); // minus to invert roll because of the frame conversion (ASCTEC coordinate frame(??) to ENU)
+  return ((short)(angle_cmd * 2293.578 )); // minus to invert roll because of the frame conversion (ASCTEC coordinate frame(??) to ENU)
 }
 
 short SIToLLCmdPitch (float angle_cmd)
 {
-  return ((short)(angle_cmd * 2293.578 ));
+  return -((short)(angle_cmd * 2293.578 ));
 }
 
 short SIToLLCmdYawRate (float yaw_rate_cmd)

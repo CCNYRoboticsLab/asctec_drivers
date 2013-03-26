@@ -75,7 +75,7 @@ SRCARM += src/util.c
 SRCARM += src/pid.c
 SRCARM += src/kalman.c
 SRCARM += src/matrices.c
-SRCARM += ../mav_common/src/comm_util.c
+SRCARM += mav_common/src/comm_util.c
 
 #Sources with interrupt routines in them
 SRCARMINT = src/$(TARGET).c
@@ -146,7 +146,8 @@ DEBUG = dwarf-2
 #C:/OpenOCD/workspace/hlfirm1/asctec_hl_comm/include/asctec_hl_comm 
 #ssdk/include 
 
-EXTRAINCDIRS = external/Common_WinARM/inc C:\WinARM\arm-elf\include include/ccny_asctec_firmware ../mav_common/include
+### changed this!!
+EXTRAINCDIRS = external/Common_WinARM/inc C:\WinARM\arm-elf\include include/ccny_asctec_firmware /mav_common/include/mav_common
 
 # List any extra directories to look for library files here.
 #     Each directory must be seperated by a space.

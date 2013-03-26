@@ -5,9 +5,9 @@
 #include <mav_common/comm.h>
 #include <mav_common/comm_packets.h>
 #include <mav_common/comm_types.h>
-
 #include "sdk.h"
 #include "LL_HL_comm.h"
+
 
 typedef struct
 {
