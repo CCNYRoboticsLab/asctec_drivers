@@ -29,8 +29,7 @@ namespace asctec
   AutoPilot::AutoPilot(ros::NodeHandle nh, ros::NodeHandle nh_private): 
     nh_(nh), 
     nh_private_(nh_private),
-    diag_updater_(),
-    first_wp_(true)
+    diag_updater_()
   {
     ROS_INFO ("Creating AutoPilot Interface");
     

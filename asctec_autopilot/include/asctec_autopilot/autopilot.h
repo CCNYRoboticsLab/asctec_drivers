@@ -83,8 +83,6 @@ namespace asctec
       int interval_CURRENTWAY_;
       int offset_CURRENTWAY_;
       bool enable_WAYPOINT_;
-      int interval_WAYPOINT_;
-      int offset_WAYPOINT_;
  
       SerialInterface* serialInterface_;
       Telemetry* telemetry_;
@@ -93,8 +91,6 @@ namespace asctec
       // Diagnostics
       diagnostic_updater::Updater diag_updater_;
       double last_spin_time_;
-
-      bool first_wp_;
 
       void diagnostics(diagnostic_updater::DiagnosticStatusWrapper& stat);
 
