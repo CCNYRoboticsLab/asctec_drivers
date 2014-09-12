@@ -1,0 +1,53 @@
+<launch>
+
+  #### Asctec Autopilot ###################################
+
+  <node pkg="asctec_autopilot" type="autopilot_node" name="AutoPilotNode" output="screen">
+
+    <remap from="/asctec/ESTOP" to="/mav/estop"/>  
+
+    <param name="port" type="string" value="/dev/ttyS3"/>
+    <param name="speed" type="int" value="57600"/>
+    <param name="freq" type="double" value="5.0"/>
+
+    <param name="enable_IMU_CALCDATA" type="bool" value="true"/>
+    <param name="interval_IMU_CALCDATA" type="int" value="1"/>
+    <param name="offset_IMU_CALCDATA" type="int" value="0"/>
+
+    <param name="enable_LL_STATUS" type="bool" value="false"/>
+    <param name="interval_LL_STATUS" type="int" value="2"/>
+    <param name="offset_LL_STATUS" type="int" value="0"/>
+    
+    <param name="enable_GPS_DATA" type="bool" value="true"/>
+    <param name="interval_GPS_DATA" type="int" value="2"/>
+    <param name="offset_GPS_DATA" type="int" value="0"/>
+    
+    <param name="enable_WAYPOINT" type="bool" value="true"/>
+    
+    <param name="enable_CURRENTWAY" type="bool" value="true"/>
+    <param name="interval_CURRENTWAY" type="int" value="2"/>
+    <param name="offset_CURRENTWAY" type="int" value="0"/>
+  </node>
+
+  <node pkg="asctec_autopilot" type="waypointcontroller_node" name="WaypointControllerNode" output="screen">
+    <param name="WAYPOINT_file" type="string" value="ways.csv"/>
+    <remap from="CURRENT_WAY" to="/asctec/CURRENT_WAY"/>
+  </node>
+
+  <node pkg="rosbag" type="record" name="rosbag_record"
+       args="record -o waypoint_imu_data /asctec/IMU_CALCDATA /asctec/GPS_DATA" output="screen"
+       />
+
+
+  <!--
+  #### Asctec Proc ########################################
+
+  <node pkg="asctec_proc" type="asctec_proc_node" name="AsctecProcNode" output="screen">
+
+    <param name="enable_state_changes" type="bool" value="true"/>
+    <param name="enable_ctrl_thrust"   type="bool" value="true"/>
+    <param name="enable_ctrl_yaw"      type="bool" value="true"/>
+
+  </node>
+  -->
+</launch>

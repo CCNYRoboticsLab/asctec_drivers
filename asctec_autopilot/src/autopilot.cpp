@@ -32,7 +32,7 @@ namespace asctec
     diag_updater_()
   {
     ROS_INFO ("Creating AutoPilot Interface");
-
+    
     // **** get parameters
 
     if (!nh_private_.getParam ("freq", freq_))
@@ -58,6 +58,10 @@ namespace asctec
       enable_GPS_DATA_ADVANCED_ = false;
     if (!nh_private_.getParam ("enable_CONTROL", enable_CONTROL_))
       enable_CONTROL_ = false;
+    if (!nh_private_.getParam ("enable_WAYPOINT", enable_WAYPOINT_))
+      enable_WAYPOINT_ = false;
+    if (!nh_private_.getParam ("enable_CURRENTWAY", enable_CURRENTWAY_))
+      enable_CURRENTWAY_ = enable_WAYPOINT_;
 
     if (!nh_private_.getParam ("interval_LL_STATUS", interval_LL_STATUS_))
       interval_LL_STATUS_ = 1;
@@ -75,6 +79,8 @@ namespace asctec
       interval_GPS_DATA_ADVANCED_ = 1;
     if (!nh_private_.getParam ("interval_CONTROL", interval_CONTROL_))
       interval_CONTROL_ = 1;
+    if (!nh_private_.getParam ("interval_CURRENTWAY", interval_CURRENTWAY_))
+      interval_CURRENTWAY_ = 1;
 
     if (!nh_private_.getParam ("offset_LL_STATUS", offset_LL_STATUS_))
       offset_LL_STATUS_ = 0;
@@ -92,6 +98,8 @@ namespace asctec
       offset_GPS_DATA_ADVANCED_ = 0;
     if (!nh_private_.getParam ("offset_CONTROL", offset_CONTROL_))
       offset_CONTROL_ = 0;
+    if (!nh_private_.getParam ("offset_CURRENTWAY", offset_CURRENTWAY_))
+      offset_CURRENTWAY_ = 0;
 
     if (freq_ <= 0.0)
       ROS_FATAL ("Invalid frequency param");
@@ -106,7 +114,7 @@ namespace asctec
 
     ros::NodeHandle nh_rawdata(nh_, asctec::ROS_NAMESPACE);    // publish to "asctec" namespace
     telemetry_ = new asctec::Telemetry(nh_rawdata);
-
+    
     // Diagnostics
     diag_updater_.add("AscTec Autopilot Status", this, &AutoPilot::diagnostics);
     diag_updater_.setHardwareID("none");
@@ -128,6 +136,8 @@ namespace asctec
     if(enable_GPS_DATA_ADVANCED_)
       telemetry_->enablePolling (asctec::RequestTypes::GPS_DATA_ADVANCED, interval_GPS_DATA_ADVANCED_,  offset_GPS_DATA_ADVANCED_);
 
+    if(enable_CURRENTWAY_)
+      telemetry_->enablePolling (asctec::RequestTypes::WAYPOINT, interval_CURRENTWAY_, offset_CURRENTWAY_);
     // **** enable control
     if(enable_CONTROL_ == true)
     {
@@ -138,7 +148,20 @@ namespace asctec
     {
       ROS_INFO("Control Disabled");
     }
+
+    // enable waypoints
+    if(enable_WAYPOINT_)
+    {
+      ROS_INFO("Waypoints Enabled");
+      telemetry_->enableWaypoints(telemetry_);
+    }
+    else
+    {
+      ROS_INFO("Waypoints Disabled");
+    }
+
     timer_ = nh_private_.createTimer (d, &AutoPilot::spin, this);
+    //serialInterface_->sendWaypoint(wpcontroller_->getNextWaypoint());
   }
 
   AutoPilot::~AutoPilot ()
@@ -158,6 +181,10 @@ namespace asctec
     //serialInterface_->serialport_bytes_tx_ = 0;
     telemetry_->publishPackets();
     telemetry_->controlCount_++;
+    if(telemetry_->wp_received_)
+    {
+      serialInterface_->sendWaypoint(telemetry_);
+    }
     if (telemetry_->estop_)
     {
       serialInterface_->sendEstop(telemetry_);
@@ -172,6 +199,7 @@ namespace asctec
     {
       serialInterface_->getPackets(telemetry_);
     }
+   
     last_spin_time_ = e.profile.last_duration.toSec();
     diag_updater_.update();
   }

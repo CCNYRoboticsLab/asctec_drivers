@@ -44,6 +44,7 @@ namespace asctec
     requestCount_ = 0;
     pollingEnabled_ = false;
     requestPackets_ = 0;
+    wp_received_ = false;
     memset (requestInterval_, 0, REQUEST_TYPES * sizeof (uint8_t));
     memset (requestOffset_, 0, REQUEST_TYPES * sizeof (uint8_t));
     REQUEST_BITMASK[RequestTypes::LL_STATUS] = 0x0001;
@@ -66,6 +67,9 @@ namespace asctec
     ControllerOutput_ = boost::make_shared<asctec_msgs::ControllerOutput>();
     GPSData_          = boost::make_shared<asctec_msgs::GPSData>         ();
     GPSDataAdvanced_  = boost::make_shared<asctec_msgs::GPSDataAdvanced> ();
+    CurrentWay_  = boost::make_shared<asctec_msgs::CurrentWay> ();
+    WAYPOINT_.navigation_status=-1;
+    WAYPOINT_.distance_to_wp=-1;
   }
   Telemetry::~Telemetry ()
   {
@@ -82,6 +86,8 @@ namespace asctec
           (requestPublisher_[i].getNumSubscribers () > 0))
         requestPackets_ |= REQUEST_BITMASK[i];
     }
+    // hack for now...
+    requestPackets_ |= REQUEST_BITMASK[RequestTypes::WAYPOINT];
   }
   void Telemetry::publishPackets ()
   {
@@ -130,6 +136,11 @@ namespace asctec
            //dumpGPS_DATA_ADVANCED();
             requestPublisher_[i].publish (GPSDataAdvanced_);
             break;
+          case RequestTypes::WAYPOINT:
+            copyWAYPOINT ();
+            CurrentWay_->header.stamp = timestamps_[RequestTypes::WAYPOINT];
+            requestPublisher_[i].publish (CurrentWay_);
+            break;
           default:
             ROS_DEBUG ("Unable to publish unknown type");
         }
@@ -160,7 +171,7 @@ namespace asctec
         requestPublisher_[msg] = nh_.advertise < asctec_msgs::GPSDataAdvanced > (requestToString (msg).c_str (), 10);
         break;
       case RequestTypes::WAYPOINT:
-        // to be filled in 
+        requestPublisher_[msg] = nh_.advertise < asctec_msgs::CurrentWay > (requestToString (msg).c_str (), 10);
         break;
       case RequestTypes::CAM_DATA:
         // to be filled in 
@@ -186,6 +197,13 @@ namespace asctec
     controlInterval_ = interval;
     controlOffset_ = offset;
     controlEnabled_ = true;
+  }
+  void Telemetry::enableWaypoints (Telemetry * telemetry_)
+  {
+    waypointSubscriber_ = nh_.subscribe("/asctec/WAYPOINT", 1, &Telemetry::copyWAYPOINT_INPUT, telemetry_, ros::TransportHints().tcpNoDelay());
+    ROS_INFO("Listening to %s data on topic: %s", "WAYPOINT","/asctec/WAYPOINT");
+    ROS_DEBUG ("Telemetry::enableWaypoints()");
+    waypointEnabled_ = true;
   }
   void Telemetry::estopCallback(const std_msgs::Bool msg)
   {
@@ -235,7 +253,7 @@ namespace asctec
         }
       case RequestTypes::WAYPOINT:
         {
-          return "WAYPOINT";
+          return "CURRENT_WAY";
         }
       case RequestTypes::CAM_DATA:
         {
@@ -486,6 +504,28 @@ namespace asctec
     GPSDataAdvanced_->speed_x_best_estimate = GPS_DATA_ADVANCED_.speed_x_best_estimate;
     GPSDataAdvanced_->speed_y_best_estimate = GPS_DATA_ADVANCED_.speed_y_best_estimate;
   }
+
+  void Telemetry::copyWAYPOINT ()
+  {
+    CurrentWay_->navigation_status = WAYPOINT_.navigation_status;
+    CurrentWay_->distance_to_wp = WAYPOINT_.distance_to_wp;
+  }
+  
+  void Telemetry::copyWAYPOINT_INPUT(asctec_msgs::Waypoint msg){
+    ROS_INFO("Received waypoint");
+    WAYPOINT_INPUT_.wp_number = msg.wp_number;
+    WAYPOINT_INPUT_.properties = msg.properties;
+    WAYPOINT_INPUT_.max_speed = msg.max_speed;
+    WAYPOINT_INPUT_.time = msg.time;
+    WAYPOINT_INPUT_.pos_acc = msg.pos_acc;
+    WAYPOINT_INPUT_.chksum = msg.chksum;
+    WAYPOINT_INPUT_.X = msg.X;
+    WAYPOINT_INPUT_.Y = msg.Y;
+    WAYPOINT_INPUT_.yaw = msg.yaw;
+    WAYPOINT_INPUT_.height = msg.height;
+    wp_received_ = true;
+  }
+  
   void Telemetry::copyCTRL_INPUT(asctec_msgs::CtrlInput msg){
     CTRL_INPUT_.pitch = msg.pitch;
     CTRL_INPUT_.roll = msg.roll;

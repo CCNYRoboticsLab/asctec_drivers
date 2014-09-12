@@ -30,7 +30,10 @@
 #include "asctec_msgs/GPSData.h"
 #include "asctec_msgs/GPSDataAdvanced.h"
 #include "asctec_msgs/CtrlInput.h"
+#include "asctec_msgs/CurrentWay.h"
+#include "asctec_msgs/Waypoint.h"
 #include <std_msgs/Bool.h>
+#include <bitset>
 
 namespace asctec
 {
@@ -115,6 +118,8 @@ namespace asctec
     void publishPackets();
 
     void enableControl (Telemetry * telemetry_, uint8_t interval = 1, uint8_t offset = 0);
+    void enableWaypoints (Telemetry * telemetry_);
+
         
     void dumpLL_STATUS();
     void dumpIMU_RAWDATA();
@@ -132,11 +137,14 @@ namespace asctec
     void copyCONTROLLER_OUTPUT();
     void copyGPS_DATA();
     void copyGPS_DATA_ADVANCED();
+    void copyWAYPOINT();
     void copyCTRL_INPUT(asctec_msgs::CtrlInput msg);
+    void copyWAYPOINT_INPUT(asctec_msgs::Waypoint msg);
     void estopCallback(const std_msgs::Bool msg);
     
     bool pollingEnabled_;
     bool controlEnabled_;
+    bool waypointEnabled_;
     uint16_t requestCount_;
     uint16_t controlCount_;
     std::bitset < 16 > requestPackets_;
@@ -157,6 +165,9 @@ namespace asctec
     ros::Subscriber controlSubscriber_;
     ros::Subscriber estopSubscriber_;
 
+    ros::Subscriber waypointSubscriber_;
+    bool wp_received_;
+    
     //packet descriptors
     static const uint8_t PD_IMURAWDATA = 0x01;
     static const uint8_t PD_LLSTATUS = 0x02;
@@ -344,6 +355,26 @@ namespace asctec
       int speed_y_best_estimate;
     };
 
+    struct CURRENT_WAY {
+      unsigned char dummy1;
+      unsigned char properties;
+      unsigned short nr_of_wp; //don't care
+
+      unsigned char current_wp; //don't care
+      unsigned char current_wp_memlocation; //don't care
+
+      unsigned char status;  //don't care
+      unsigned char dummy2;
+
+      unsigned short navigation_status;          //see WP_NAVSTAT_... defines
+      unsigned short distance_to_wp;             //distance to WP in dm
+    }; 
+
+    #define WP_NAVSTAT_REACHED_POS        0x01
+    #define WP_NAVSTAT_REACHED_POS_TIME   0x02 //vehicle is within a radius of WAYPOINT.pos_acc and time to stay is over
+    #define WP_NAVSTAT_20M                0x04 //vehicle within a 20m radius of the waypoint
+    #define WP_NAVSTAT_PILOT_ABORT        0x08  //waypoint navigation aborted by safety pilot
+    
     struct WAYPOINT
     {
       //always set to 1
@@ -370,6 +401,14 @@ namespace asctec
       //height over 0 reference in mm
       int height;
     };
+
+    #define WPROP_ABSCOORDS     0x01
+    #define WPROP_HEIGHTENABLED 0x02
+    #define WPROP_YAWENABLED    0x04
+    #define WPROP_AUTOMATICGOTO 0x10
+    #define WPROP_CAM_TRIGGER   0x20
+
+
     struct CTRL_INPUT
     {
         //serial commands (= Scientific Interface)
@@ -426,9 +465,10 @@ You will receive an acknowledge if a command or a waypoint was received correctl
     struct RC_DATA RC_DATA_;
     struct CONTROLLER_OUTPUT CONTROLLER_OUTPUT_;
     struct GPS_DATA GPS_DATA_;
-    struct WAYPOINT WAYPOINT_;
     struct GPS_DATA_ADVANCED GPS_DATA_ADVANCED_;
+    struct CURRENT_WAY WAYPOINT_;
     struct CTRL_INPUT CTRL_INPUT_;
+    struct WAYPOINT WAYPOINT_INPUT_;
     asctec_msgs::LLStatusPtr LLStatus_;
     asctec_msgs::IMURawDataPtr IMURawData_;
     asctec_msgs::IMUCalcDataPtr IMUCalcData_;
@@ -436,6 +476,7 @@ You will receive an acknowledge if a command or a waypoint was received correctl
     asctec_msgs::ControllerOutputPtr ControllerOutput_;
     asctec_msgs::GPSDataPtr GPSData_;
     asctec_msgs::GPSDataAdvancedPtr GPSDataAdvanced_;
+    asctec_msgs::CurrentWayPtr CurrentWay_;
 
     ros::NodeHandle nh_;
     //asctec_msgs::CtrlInput CtrlInput_;
