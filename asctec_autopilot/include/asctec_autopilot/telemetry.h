@@ -165,8 +165,6 @@ namespace asctec
     ros::Subscriber controlSubscriber_;
     ros::Subscriber estopSubscriber_;
 
-    uint8_t waypointInterval_;
-    uint8_t waypointOffset_;
     ros::Subscriber waypointSubscriber_;
     bool wp_received_;
     
