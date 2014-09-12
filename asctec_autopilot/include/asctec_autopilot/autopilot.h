@@ -79,13 +79,22 @@ namespace asctec
       bool enable_CONTROL_;
       int interval_CONTROL_;
       int offset_CONTROL_;
-
+      bool enable_CURRENTWAY_;
+      int interval_CURRENTWAY_;
+      int offset_CURRENTWAY_;
+      bool enable_WAYPOINT_;
+      int interval_WAYPOINT_;
+      int offset_WAYPOINT_;
+ 
       SerialInterface* serialInterface_;
       Telemetry* telemetry_;
+
 
       // Diagnostics
       diagnostic_updater::Updater diag_updater_;
       double last_spin_time_;
+
+      bool first_wp_;
 
       void diagnostics(diagnostic_updater::DiagnosticStatusWrapper& stat);
 

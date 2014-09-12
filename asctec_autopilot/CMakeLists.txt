@@ -23,6 +23,8 @@ rosbuild_add_library (autopilot src/autopilot.cpp
                                 src/crc16.cpp 
                                 src/telemetry.cpp)
 
+rosbuild_add_library(waypointcontroller src/waypointcontroller.cpp)
+
 # create autopilot_nodelet library
 
 rosbuild_add_library (autopilot_nodelet src/autopilot_nodelet.cpp)
@@ -32,3 +34,8 @@ target_link_libraries (autopilot_nodelet autopilot)
 
 rosbuild_add_executable(autopilot_node src/autopilot_node.cpp)
 target_link_libraries (autopilot_node autopilot)
+
+rosbuild_add_executable(waypointcontroller_node src/waypointcontroller_node.cpp)
+target_link_libraries (waypointcontroller_node waypointcontroller)
+
+#rosbuild_add_executable(bag_to_gpscsv src/bag_to_gpscsv.cpp)

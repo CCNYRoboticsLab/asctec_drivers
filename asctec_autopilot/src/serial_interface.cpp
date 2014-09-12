@@ -271,6 +271,47 @@ namespace asctec
       ROS_BREAK ();
     }
   }
+  void SerialInterface::sendWaypoint (Telemetry * telemetry)
+  {
+    int i;
+    char data[5];
+    struct Telemetry::WAYPOINT wp = telemetry->WAYPOINT_INPUT_;
+
+    if(!telemetry->waypointEnabled_) return;
+
+    //ROS_DEBUG ("sendWaypoint started");
+    flush();
+    unsigned char cmd[] = ">*>ws";
+    if(wp.chksum != (short)(wp.yaw + wp.height + wp.time + wp.X + wp.Y + wp.max_speed + wp.pos_acc + wp.properties + wp.wp_number + (short) 0xAAAA)){
+        ROS_INFO("invalid WP checksum: %d != %d", wp.chksum, (short)(wp.yaw + wp.height + wp.time + wp.X + wp.Y + wp.max_speed + wp.pos_acc + wp.properties + wp.wp_number + (short) 0xAAAA));
+      return;
+    }
+    output(cmd,5);
+    output((unsigned char*) &wp, sizeof(struct Telemetry::WAYPOINT));
+    ROS_INFO("sending waypoint to pelican: size of WAYPOINT %zd", sizeof(struct Telemetry::WAYPOINT));
+    wait(5);
+    //ROS_INFO("Data Available");
+    i = read (dev_,data,5);
+    if (i != 5) {
+      ROS_ERROR("Waypoint Response : Insufficient Data");
+      flush();
+      return;
+    }
+    if (strncmp(data,">a",2) != 0) {
+      ROS_ERROR("Corrupt Response Header %c%c (%0x%0x)",data[0],data[1],data[0],data[1]);
+      flush();
+      return;
+    }
+    if (strncmp(data+3,"a<",2) != 0) {
+      ROS_ERROR("Corrupt Response Footer %c%c (%0x%0x)",data[3],data[4],data[3],data[4]);
+      flush();
+      return;
+    }
+    telemetry->wp_received_ = false;
+    ROS_INFO("Waypoint Response Code %0x",data[2]);
+    //ROS_INFO ("sendWaypoint completed" );
+  }
+
   void SerialInterface::sendControl (Telemetry * telemetry)
   {
     int i;
@@ -343,9 +384,12 @@ namespace asctec
 
     ROS_DEBUG ("  Requesting %04x %zd packets", (short) telemetry->requestPackets_.to_ulong (),
               telemetry->requestPackets_.count ());
-    sprintf (cmd, ">*>p%c", (short) telemetry->requestPackets_.to_ulong ());
+    //sprintf (cmd, ">*>p%c", (short) telemetry->requestPackets_.to_ulong ());
+    sprintf (cmd, ">*>p");
+    cmd[4] = 0xFF & telemetry->requestPackets_.to_ulong ();
+    cmd[5] = 0xFF & telemetry->requestPackets_.to_ulong () >> 8;
     output (cmd, 6);
-
+    ROS_DEBUG ("  Command: %s", cmd);
     for (i = 0; i < telemetry->requestPackets_.count (); i++)
     {
       packetTime = ros::Time::now();  // Presumes that the AutoPilot is grabbing the data for each packet
@@ -430,6 +474,17 @@ namespace asctec
           memcpy (&telemetry->GPS_DATA_ADVANCED_, spacket, packet_size);
           telemetry->timestamps_[RequestTypes::GPS_DATA_ADVANCED] = packetTime;
           if (crc_valid (packet_crc, &telemetry->GPS_DATA_ADVANCED_, packet_size))
+          {
+            result = true;
+          }
+          //telemetry->dumpGPS_DATA_ADVANCED();
+        }
+        else if (packet_type == Telemetry::PD_CURRENTWAY)
+        {
+          ROS_DEBUG ("  Packet type is CURRENTWAY");
+          memcpy (&telemetry->WAYPOINT_, spacket, packet_size);
+          telemetry->timestamps_[RequestTypes::WAYPOINT] = packetTime;
+          if (crc_valid (packet_crc, &telemetry->WAYPOINT_, packet_size))
           {
             result = true;
           }
