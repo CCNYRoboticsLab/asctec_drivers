@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+  <name>asctec_description</name>
+  <version>0.0.0</version>
+  <description>AscTec Quadrotor Descriptions</description>
+
+  <author>William Morris, Ivan Dryanovski</author>
+  <author email="pbovbel@clearpathrobotics.com">Paul Bovbel</author>
+  <maintainer email="pbovbel@clearpathrobotics.com">Paul Bovbel</maintainer>
+
+  <url type="website">http://ros.org/wiki/asctec_drivers</url>
+  <url type="bugtracker">https://github.com/clearpathrobotics/asctec_drivers/issues</url>
+  <url type="repository">https://github.com/clearpathrobotics/asctec_drivers</url>
+
+  <license>GPL</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>urdf</run_depend>
+  <run_depend>xacro</run_depend>
+
+  <export>
+  </export>
+</package>

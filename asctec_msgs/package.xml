@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package>
+  <name>asctec_msgs</name>
+  <version>0.0.0</version>
+  <description>Common messages for the AscTec AutoPilot</description>
+
+  <author>William Morris, Ivan Dryanovski, Steven Bellens, Patrick Bouffard et al.</author>
+  <author email="pbovbel@clearpathrobotics.com">Paul Bovbel</author>
+  <maintainer email="pbovbel@clearpathrobotics.com">Paul Bovbel</maintainer>
+
+  <url type="website">http://ros.org/wiki/asctec_drivers</url>
+  <url type="bugtracker">https://github.com/clearpathrobotics/asctec_drivers/issues</url>
+  <url type="repository">https://github.com/clearpathrobotics/asctec_drivers</url>
+
+  <license>GPL</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>std_msgs</run_depend>
+
+  <export>
+  </export>
+</package>

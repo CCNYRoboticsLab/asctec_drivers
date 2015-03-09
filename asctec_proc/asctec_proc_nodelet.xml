@@ -1,8 +1,0 @@
-<!-- Asctec proc nodelet publisher -->
-<library path="lib/libasctec_proc_nodelet">
-  <class name="asctec_proc/AsctecProcNodelet" type="AsctecProcNodelet" base_class_type="nodelet::Nodelet">
-    <description>
-      Asctec proc nodelet publisher.
-    </description>
-  </class>
-</library>
