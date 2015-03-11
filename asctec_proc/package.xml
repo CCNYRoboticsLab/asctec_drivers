@@ -1,0 +1,38 @@
+<package>
+  <name>asctec_proc</name>
+  <version>0.0.0</version>
+  <description>Bridge between asctec_autopilot and hardware-independent MAV tools</description>
+
+  <author>Ivan Dryanovski</author>
+  <author email="pbovbel@clearpathrobotics.com">Paul Bovbel</author>
+  <maintainer email="pbovbel@clearpathrobotics.com">Paul Bovbel</maintainer>
+
+  <url type="website">http://ros.org/wiki/asctec_drivers</url>
+  <url type="bugtracker">https://github.com/clearpathrobotics/asctec_drivers/issues</url>
+  <url type="repository">https://github.com/clearpathrobotics/asctec_drivers</url>
+
+  <license>GPL</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>asctec_msgs</build_depend>
+  <build_depend>mav_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>nodelet</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  <run_depend>asctec_msgs</run_depend>
+  <run_depend>mav_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>nodelet</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>tf</run_depend>
+
+  <export>
+    <nodelet plugin="${prefix}/asctec_proc_nodelet.xml" />
+  </export>
+
+</package>

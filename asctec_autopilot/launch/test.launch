@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+  <node pkg="asctec_autopilot" type="autopilot_node" name="asctec_autopilot_node" output="screen">
+    <param name="port" value="/dev/ftdi_A7048I9H"/>
+    <param name="enable_CONTROL" value="true"/>
+  </node>
+
+</launch>

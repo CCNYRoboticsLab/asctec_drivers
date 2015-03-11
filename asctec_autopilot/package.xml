@@ -1,0 +1,36 @@
+<package>
+  <name>asctec_autopilot</name>
+  <version>0.0.0</version>
+  <description>AscTec Autopilot Hardware Driver</description>
+
+  <author>William Morris, Ivan Dryanovski, Steven Bellens, Patrick Bouffard et al.</author>
+  <author email="pbovbel@clearpathrobotics.com">Paul Bovbel</author>
+  <maintainer email="pbovbel@clearpathrobotics.com">Paul Bovbel</maintainer>
+
+  <url type="website">http://ros.org/wiki/asctec_drivers</url>
+  <url type="bugtracker">https://github.com/clearpathrobotics/asctec_drivers/issues</url>
+  <url type="repository">https://github.com/clearpathrobotics/asctec_drivers</url>
+
+  <license>GPL</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>asctec_msgs</build_depend>
+  <build_depend>diagnostic_updater</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>nodelet</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <run_depend>asctec_msgs</run_depend>
+  <run_depend>diagnostic_updater</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>nodelet</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+
+  <export>
+    <nodelet plugin="${prefix}/autopilot_nodelet.xml" />
+  </export>
+
+</package>
