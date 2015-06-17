@@ -1,4 +1,4 @@
-<robot name="CityFlyer">
+<robot name="Pelican">
   
 ################################################################################
 # LINKS                                                                        #
@@ -69,7 +69,7 @@
 
   ##### camera #################################################################
 
-  <link name="camera_link"/>
+  <link name="tango"/>
 
 
 ################################################################################
@@ -112,12 +112,13 @@
 
   ##### rgbd ##################################################################
 
-  <joint name="base_link_to_camera" type="fixed">
+  <joint name="base_link_to_tango" type="fixed">
     <parent link="base_link"/>
-    <child link="camera_link"/>
+    <child link="tango"/>
     <origin xyz="0.00 0.00 0.20" rpy="0.0 0.23 0.0"/>
   </joint>
 
 </robot>
+
 
 
