@@ -15,8 +15,8 @@
 #include <boost/thread/mutex.hpp>
 #include <tf/transform_datatypes.h>
 
-#include <mav_srvs/SetMotorsOnOff.h>
-#include <mav_srvs/GetMotorsOnOff.h>
+#include <mav_msgs/SetMotorsOnOff.h>
+#include <mav_msgs/GetMotorsOnOff.h>
 
 namespace asctec
 {
@@ -115,10 +115,10 @@ class AsctecProc
     void stopMotors();
     void publishCtrlInputMsg();
 
-    bool setMotorsOnOff(mav_srvs::SetMotorsOnOff::Request  &req,
-                        mav_srvs::SetMotorsOnOff::Response &res);
-    bool getMotorsOnOff(mav_srvs::GetMotorsOnOff::Request  &req,
-                        mav_srvs::GetMotorsOnOff::Response &res);
+    bool setMotorsOnOff(mav_msgs::SetMotorsOnOff::Request  &req,
+                        mav_msgs::SetMotorsOnOff::Response &res);
+    bool getMotorsOnOff(mav_msgs::GetMotorsOnOff::Request  &req,
+                        mav_msgs::GetMotorsOnOff::Response &res);
 
   public:
 

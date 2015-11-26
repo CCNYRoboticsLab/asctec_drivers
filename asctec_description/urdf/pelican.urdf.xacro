@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<robot name="pelican" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find asctec_description)/urdf/materials.urdf" />
+
+  <property name="M_PI" value="3.14159"/>
+
+  <link name="base_footprint">
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="${M_PI/2} 0.0 ${M_PI}"/>
+      <geometry>
+        <cylinder radius="1.0" length="1.0"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="base_link_to_base_footprint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_footprint"/>
+    <origin xyz="0.00 0.00 -0.195" rpy="0.0 0.0 0.0"/>
+  </joint>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" rpy="${M_PI/2} 0.0 ${M_PI}"/>
+      <geometry>
+        <mesh filename="package://asctec_description/meshes/pelican.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Blue"/>
+    </visual>
+  </link>
+
+  <xacro:macro name="pelican_leg" params="name *origin">
+
+    <link name="leg_${name}">
+      <visual>
+        <geometry>
+          <box size="0.044 0.007 0.114"/>
+        </geometry>
+        <xacro:insert_block name="origin"/>
+        <material name="Green"/>
+      </visual>
+    </link>
+    <joint name="base_link_to_leg_${name}" type="fixed">
+      <parent link="base_link"/>
+      <child link="leg_${name}"/>
+      <origin xyz="0.00 0.00 -0.083" rpy="0.0 0.0 0.0"/>
+    </joint>
+
+  </xacro:macro>
+
+  <xacro:pelican_leg name="1">
+    <origin xyz="0.089 0.00 -0.057" rpy="0.0 0.0 0.0"/>
+  </xacro:pelican_leg>
+
+  <xacro:pelican_leg name="2">
+    <origin xyz="-0.089 0.00 -0.057" rpy="0.0 0.0 0.0"/>
+  </xacro:pelican_leg>
+
+  <xacro:pelican_leg name="3">
+    <origin xyz="0.00 0.089 -0.057" rpy="0.0 0.0 1.5708"/>
+  </xacro:pelican_leg>
+
+  <xacro:pelican_leg name="4">
+    <origin xyz="0.00 -0.089 -0.057" rpy="0.0 0.0 1.5708"/>
+  </xacro:pelican_leg>
+
+</robot>
