@@ -27,7 +27,7 @@
 
 typedef asctec::AutoPilotNodelet AutoPilotNodelet;
 
-PLUGINLIB_DECLARE_CLASS (asctec_autopilot, AutoPilotNodelet, AutoPilotNodelet, nodelet::Nodelet);
+PLUGINLIB_EXPORT_CLASS (asctec::AutoPilotNodelet, nodelet::Nodelet);
 
 void asctec::AutoPilotNodelet::onInit ()
 {

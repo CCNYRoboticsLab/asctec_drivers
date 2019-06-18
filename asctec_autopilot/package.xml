@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>asctec_autopilot</name>
+    <version>0.1.0</version>
+    <description>This is the hardware driver for the AscTec AutoPilot built by Ascending Technologies GmbH. http://www.asctec.de. It should be compatible with the Hummingbird and Pelican quadrotor aircraft. This driver is not yet complete and the interfaces are not yet finalized. Full functionality will be supported in the near future. Contributions are welcome.</description>
+    <maintainer email="todo@todo.todo">William Morris</maintainer>
+    <maintainer email="todo@todo.todo">Ivan Dryanovski</maintainer>
+    <maintainer email="todo@todo.todo">Steven Bellens</maintainer>
+    <maintainer email="todo@todo.todo">Patrick Bouffard</maintainer>
+    <license>GPL</license>
+    <url>http://ros.org/wiki/asctec_autopilot</url>
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <build_depend>roscpp</build_depend>
+    <build_depend>nodelet</build_depend>
+    <build_depend>pluginlib</build_depend>
+    <build_depend>geometry_msgs</build_depend>
+    <build_depend>sensor_msgs</build_depend>
+    <build_depend>nav_msgs</build_depend>
+    <build_depend>diagnostic_updater</build_depend>
+    <build_depend>asctec_msgs</build_depend>
+
+    <exec_depend>roscpp</exec_depend>
+    <exec_depend>nodelet</exec_depend>
+    <exec_depend>pluginlib</exec_depend>
+    <exec_depend>geometry_msgs</exec_depend>
+    <exec_depend>sensor_msgs</exec_depend>
+    <exec_depend>nav_msgs</exec_depend>
+    <exec_depend>diagnostic_updater</exec_depend>
+    <exec_depend>asctec_msgs</exec_depend>
+
+    <!--export>
+        <nodelet plugin="${prefix}/autopilot_nodelet.xml" />
+    </export-->
+</package>
