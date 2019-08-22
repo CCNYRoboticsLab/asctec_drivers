@@ -1,4 +1,5 @@
 <package>
+  <name>ccny_asctec_firmware_2</name>
   <description brief="ccny_asctec_firmware_2">
 
      Firmware for the Asctec Autopilot HighLevel Processor, in part based on asctec_hl_firmware by Achtelik et al. For the 2012 version of the asctec HL/LL SDK.
