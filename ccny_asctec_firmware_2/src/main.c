@@ -177,14 +177,14 @@ void mainloop(void)
 void calibrate()
 {
   double sum = 0.0;
-
-  for (int i = 0; i < 2000; ++i)
+  unsigned int i;
+  for (i = 0; i < 2000; ++i)
   {
     wait(1200); // wait 1 ms
     HL2LL_write_cycle();
-    double ax = LL_1khz_attitude_data.acc_x;
-    double ay = LL_1khz_attitude_data.acc_y;
-    double az = LL_1khz_attitude_data.acc_z;
+    double ax = RO_ALL_Data.acc_x;
+    double ay = RO_ALL_Data.acc_y;
+    double az = RO_ALL_Data.acc_z;
 
     double a = sqrt(ax*ax + ay*ay + az*az);
     sum +=a;

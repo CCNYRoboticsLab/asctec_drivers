@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>pelican_urdf</name>
+    <version>0.1.0</version>
+    <description>STL and URDF files for the AscTec Pelican quadrotor.</description>
+    <maintainer email="todo@todo.todo">William Morris</maintainer>
+    <maintainer email="todo@todo.todo">Ivan Dryanovski</maintainer>
+    <license>GPL</license>
+    <url>http://ros.org/wiki/pelican_urdf</url>
+    <buildtool_depend>catkin</buildtool_depend>
+</package>

@@ -10,9 +10,8 @@ src/uart1.o: src/uart1.c external/Common_WinARM/inc/LPC214x.h \
   include/ccny_asctec_firmware/system.h \
   include/ccny_asctec_firmware/uart.h \
   C:\WinARM\arm-elf\include/inttypes.h \
-  c:\winarm\bin\../lib/gcc/arm-elf/4.1.1/include/stddef.h \
-  ../mav_common/include/mav_common/comm_packets.h \
-  ../mav_common/include/mav_common/comm_types.h \
+  c:\asctec_arm_sdk\winarm\bin\../lib/gcc/arm-elf/4.1.1/include/stddef.h \
+  mav_common/comm_packets.h mav_common/comm_types.h \
   external/Common_WinARM/inc/irq.h include/ccny_asctec_firmware/gpsmath.h \
   include/ccny_asctec_firmware/ssp.h
 
@@ -44,11 +43,11 @@ include/ccny_asctec_firmware/uart.h:
 
 C:\WinARM\arm-elf\include/inttypes.h:
 
-c:\winarm\bin\../lib/gcc/arm-elf/4.1.1/include/stddef.h:
+c:\asctec_arm_sdk\winarm\bin\../lib/gcc/arm-elf/4.1.1/include/stddef.h:
 
-../mav_common/include/mav_common/comm_packets.h:
+mav_common/comm_packets.h:
 
-../mav_common/include/mav_common/comm_types.h:
+mav_common/comm_types.h:
 
 external/Common_WinARM/inc/irq.h:
 

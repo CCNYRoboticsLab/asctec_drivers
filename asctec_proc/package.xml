@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>asctec_proc</name>
+    <version>0.1.0</version>
+    <description>The asctec_proc package is a bridge between the asctec_autopilot software and hardware-independent MAV tools.</description>
+    <maintainer email="todo@todo.todo">Ivan Dryanovski</maintainer>
+    <license>GPL</license>
+    <url>http://ros.org/wiki/asctec_proc</url>
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <build_depend>roscpp</build_depend>
+    <build_depend>nodelet</build_depend>
+    <build_depend>mav_msgs</build_depend>
+    <build_depend>mav_srvs</build_depend>
+    <build_depend>sensor_msgs</build_depend>
+    <build_depend>std_msgs</build_depend>
+    <build_depend>tf</build_depend>
+    <build_depend>asctec_msgs</build_depend>
+
+    <exec_depend>roscpp</exec_depend>
+    <exec_depend>nodelet</exec_depend>
+    <exec_depend>mav_msgs</exec_depend>
+    <exec_depend>mav_srvs</exec_depend>
+    <exec_depend>sensor_msgs</exec_depend>
+    <exec_depend>std_msgs</exec_depend>
+    <exec_depend>tf</exec_depend>
+    <exec_depend>asctec_msgs</exec_depend>
+
+    <!--export>
+        <nodelet plugin="${prefix}/asctec_proc_nodelet.xml" />
+    </export-->
+</package>

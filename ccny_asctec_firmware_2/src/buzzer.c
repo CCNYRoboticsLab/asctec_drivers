@@ -222,7 +222,8 @@ void buzzer_handler(unsigned int vbat)	//needs to be triggered at 100 Hz
 #endif
 
 	//buzzer control
-	for(unsigned char i=0;i<BUZZ_NR_OF_WARNINGS; i++)
+	unsigned char i;
+	for(i=0;i<BUZZ_NR_OF_WARNINGS; i++)
 	{
 		if(buz_priority&(1<<i))
 		{

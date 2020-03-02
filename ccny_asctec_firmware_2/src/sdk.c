@@ -107,6 +107,7 @@ PacketInfo *          g_mav_kf_cfg_pkt_info;
 // *** for MAV state machine
 
 short   g_motors_running;             // are the motors on?
+short   g_motors_status_counter;      // counts motor statuses to avoid spurios toggles
 int64_t g_toggle_motors_start_time;   // when we started toggling the motors
 //int16_t g_land_thrust;                // while landing, this is the current thrust  // TODO: type
 
@@ -121,6 +122,7 @@ void sdkInit(void)
 {
   g_sdk_loops = 0;
   g_motors_running  = 0;
+  g_motors_status_counter = 0;
 
   // **** these should be sent by the CPU upon successful connection
 
@@ -275,12 +277,12 @@ inline void sendMavPoseData(void)
 
 inline void sendImuData(void)
 {
-  g_imu_pkt.roll  = LLToSIAngleRoll (LL_1khz_attitude_data.angle_roll);
-  g_imu_pkt.pitch = LLToSIAnglePitch(LL_1khz_attitude_data.angle_pitch);
-  g_imu_pkt.yaw   = LLToSIAngleYaw  (LL_1khz_attitude_data.angle_yaw);
-  g_imu_pkt.roll_rate  = LLToSIAngleRateRoll (LL_1khz_attitude_data.angvel_roll);
-  g_imu_pkt.pitch_rate = LLToSIAngleRatePitch(LL_1khz_attitude_data.angvel_pitch);
-  g_imu_pkt.yaw_rate   = LLToSIAngleRateYaw  (LL_1khz_attitude_data.angvel_yaw);
+  g_imu_pkt.roll  = LLToSIAngleRoll (RO_ALL_Data.angle_roll); //LL_1khz_attitude_data.angle_roll);
+  g_imu_pkt.pitch = LLToSIAnglePitch(RO_ALL_Data.angle_pitch); //LL_1khz_attitude_data.angle_pitch);
+  g_imu_pkt.yaw   = LLToSIAngleYaw  (RO_ALL_Data.angle_yaw); //LL_1khz_attitude_data.angle_yaw);
+  g_imu_pkt.roll_rate  = LLToSIAngleRateRoll (RO_ALL_Data.angvel_roll); //LL_1khz_attitude_data.angvel_roll);
+  g_imu_pkt.pitch_rate = LLToSIAngleRatePitch(RO_ALL_Data.angvel_pitch);//LL_1khz_attitude_data.angvel_pitch);
+  g_imu_pkt.yaw_rate   = LLToSIAngleRateYaw  (RO_ALL_Data.angvel_yaw);//LL_1khz_attitude_data.angvel_yaw);
   writePacket2Ringbuffer(MAV_IMU_PKT_ID, (unsigned char*)&g_imu_pkt, sizeof(g_imu_pkt));
 }
 
@@ -291,7 +293,8 @@ inline void sendFlightStateData(void)
 
 inline void sendRcData(void)
 {
-  for (int i = 0; i < 8; ++i)
+  unsigned int i;
+  for (i = 0; i < 8; ++i)
     g_rcdata_pkt.channel[i] = RO_RC_Data.channel[i];
 
   writePacket2Ringbuffer(MAV_RCDATA_PKT_ID, (unsigned char*)&g_rcdata_pkt, sizeof(g_rcdata_pkt));
@@ -487,8 +490,8 @@ inline void processKF()
     g_pose_pkt.vz = g_mav_height_pkt.vz;
   }
 
-  g_pose_pkt.roll  = LLToSIAngleRoll (LL_1khz_attitude_data.angle_roll);
-  g_pose_pkt.pitch = LLToSIAnglePitch(LL_1khz_attitude_data.angle_pitch);
+  g_pose_pkt.roll  = LLToSIAngleRoll (RO_ALL_Data.angle_roll);
+  g_pose_pkt.pitch = LLToSIAnglePitch(RO_ALL_Data.angle_pitch);
 }
 
 
@@ -519,7 +522,7 @@ inline void feedbackBeep()
       beeper(OFF);
   }
 }
-
+/*
 inline void processMotorStateChanges()
 {
   short motors_running = LL_1khz_attitude_data.status2 & 0x1;
@@ -539,6 +542,46 @@ inline void processMotorStateChanges()
   }
 
   g_motors_running = motors_running;
+}
+*/
+
+inline void processMotorStateChanges()
+{
+  int MOTOR_COUNTER_MAX = 5;
+  short motors_status = LL_1khz_attitude_data.status2 & 0x1;
+
+  // counter to avoid spurious changes
+  if (motors_status == 0) g_motors_status_counter--;
+  else g_motors_status_counter++;
+
+  // save prev state
+  int prev_motors_running = g_motors_running;
+
+  // constrain counter to [0, MOTOR_COUNTER_MAX]
+  if (g_motors_status_counter >= MOTOR_COUNTER_MAX)
+  {
+    g_motors_status_counter = MOTOR_COUNTER_MAX;
+    g_motors_running = 1;
+  }
+  if (g_motors_status_counter < 0)
+  {
+    g_motors_status_counter = 0;
+    g_motors_running = 0;
+  }
+
+  if (prev_motors_running == 0 && g_motors_running == 1)
+  {
+    // motors just changed from to ON from Remote command
+    g_flight_state_pkt.state = MAV_STATE_IDLE;
+  }
+  else if (prev_motors_running == 1 && g_motors_running == 0)
+  {
+    if (g_flight_state_pkt.state != MAV_STATE_ERROR)
+    {
+      // motors just changed from ON to OFF
+      g_flight_state_pkt.state = MAV_STATE_OFF;
+    }
+  }
 }
 
 inline void processFlightActionRequests()

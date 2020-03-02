@@ -26,7 +26,7 @@
 
 typedef asctec::AsctecProcNodelet AsctecProcNodelet;
 
-PLUGINLIB_DECLARE_CLASS (asctec_proc, AsctecProcNodelet, AsctecProcNodelet, nodelet::Nodelet);
+PLUGINLIB_EXPORT_CLASS (asctec::AsctecProcNodelet, nodelet::Nodelet);
 
 void asctec::AsctecProcNodelet::onInit ()
 {
